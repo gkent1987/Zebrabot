@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Zebra.com Einstein Chatbot - Marketing</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type='text/css'>
+        .contactzebra .contact-zebra-salesforce-wrap {
+            padding-top: 10px;
+            position: fixed;
+            bottom: 0;
+            right: 1em;
+            z-index: 1;
+        }
+
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            background-color: #ffd200 !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            color: #080808 !important;
+            font-weight: 790 !important;
+            background: #ffd300 !important;
+            border-radius: 10px 10px 0px 0px !important;
+            min-width: fit-content !important;
+            max-width: fit-content !important;
+            margin-top: .8em !important;
+        }
+
+        .helpButtonEnabled:focus .helpButtonLabel {
+            text-decoration: none !important;
+        }
+
+        .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before,
+        .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
+            background-color: none !important;
+            content: none !important;
+        }
+    </style>
+
+    <script src="https://componentdemo-dev-ed.lightning.force.com/lightning/lightning.out.js"></script>
+
+    <script>
+        window.addEventListener("message", receiveMessage, false);
+
+        function receiveMessage(event) {
+            var payload = event.data;
+            if (payload && payload.type === "chasitor.sendMessage") {
+                embedded_svc.postMessage("chasitor.sendMessage", payload.message);
+            }
+        };
+    </script>
+</head>
+
+<body>
+
+    <div class="cmp-container__nav--language-dropdown" >
+
+        <div class="cmp-container__nav--region">
+            <h4>North America</h4>
+            <ul class="cmp-container__nav--language-option">
+
+                <li>
+                    <a href="/us/en/index.html" title="United States"
+                        data-language="United States - English">
+                        United States - English
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="cmp-container__nav--region">
+            <h4>Latin America</h4>
+            <ul class="cmp-container__nav--language-option">
+
+                <li>
+                    <a href="/br/pt/index.html" title="Brasil" data-language="Brasil - Português">
+                        Brasil - Português
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/la/es/index.html" title="America Latina"
+                        data-language="America Latina - Español">
+                        America Latina - Español
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="cmp-container__nav--region">
+            <h4>Asia</h4>
+            <ul class="cmp-container__nav--language-option">
+
+                <li>
+                    <a href="/ap/en/index.html" title="Asia Pacific"
+                        data-language="Asia Pacific - English">
+                        Asia Pacific - English
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/cn/zh/index.html" title="中国" data-language="中国 - 普通话">
+                        中国 - 普通话
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/jp/ja/index.html" title="日本" data-language="日本 - 日本語">
+                        日本 - 日本語
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kr/ko/index.html" title="한국" data-language="한국 - 한국어">
+                        한국 - 한국어
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="cmp-container__nav--region">
+            <h4>Europe &amp; Middle East</h4>
+            <ul class="cmp-container__nav--language-option">
+
+                <li>
+                    <a href="/de/de/index.html" title="Deutschland"
+                        data-language="Deutschland - Deutsch">
+                        Deutschland - Deutsch
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/es/es/index.html" title="España" data-language="España - Español">
+                        España - Español
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/fr/fr/index.html" title="France" data-language="France - Français">
+                        France - Français
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/it/it/index.html" title="Italia" data-language="Italia - Italiano">
+                        Italia - Italiano
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/pl/pl/index.html" title="Polska" data-language="Polska - Polski">
+                        Polska - Polski
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ru/ru/index.html" title="Россия" data-language="Россия - Pусский">
+                        Россия - Pусский
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/tr/tr/index.html" title="Türkiye" data-language="Türkiye - Türkçe">
+                        Türkiye - Türkçe
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/gb/en/index.html" title="United Kingdom"
+                        data-language="United Kingdom - English">
+                        United Kingdom - English
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('click', function (event) {
+            console.log('Click event fired.');
+            const icons = document.querySelectorAll('span.embeddedServiceIcon[style*="display: none;"]');
+            icons.forEach((icon) => {
+                icon.style.display = 'inline-block';
+            });
+        });
+    </script>
+
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+        var initESW = function (gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = true; //Or false
+
+            var currentUrl = window.location.href;
+            var locale = 'en-us';
+
+            if (currentUrl.split("/")[4]) {
+                if (currentUrl.split("/")[4].length == 2) {
+                    locale = currentUrl.split("/")[4] + "-" + currentUrl.split("/")[3];
+                }
+                if (currentUrl.split("/")[4].split(".")[0].length == 2) {
+                    locale = currentUrl.split("/")[4].split(".")[0] + "-" + currentUrl.split("/")[3].split(".")[0];
+                }
+            }
+
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var languageParam = urlParams.get('lang');
+
+            // Define the language configuration object
+            var languageConfig = {
+                "en-us": {
+                    "Chat with Sales": {
+                        "text": "Chat with us",
+                        "Loading": "Loading...",
+                        "Offline": "Contact us",
+                        "language": "en_US"
+                    }
+                },
+                "en-ap": {
+                    "Chat with Sales": {
+                        "text": "Chat with us",
+                        "Loading": "Loading...",
+                        "Offline": "Contact us",
+                        "language": "en_US"
+                    }
+                },
+                "en-gb": {
+                    "Chat with Sales": {
+                        "text": "Chat with us",
+                        "Loading": "Loading...",
+                        "Offline": "Contact us",
+                        "language": "en_US"
+                    }
+                },
+                "zh-cn": {
+                    "Chat with Sales": {
+                        "text": "与我们聊天",
+                        "Loading": "加载中...",
+                        "Offline": "联系我们",
+                        "language": "zh_CN"
+                    }
+                },
+                "pt-br": {
+                    "Chat with Sales": {
+                        "text": "Fale conosco",
+                        "Loading": "Carregando...",
+                        "Offline": "Contate-nos",
+                        "language": "pt_PT"
+                    }
+                },
+                "es-la": {
+                    "Chat with Sales": {
+                        "text": "Hable con nosotros",
+                        "Loading": "Cargando...",
+                        "Offline": "Contáctenos",
+                        "language": "en_US" //default english
+                    }
+                },
+                "es-es": {
+                    "Chat with Sales": {
+                        "text": "Chatee con nosotros",
+                        "Loading": "Cargando...",
+                        "Offline": "Contáctenos",
+                        "language": "es"
+                    }
+                },
+                "ja-jp": {
+                    "Chat with Sales": {
+                        "text": "チャットサービス",
+                        "Loading": "読み込み中...",
+                        "Offline": "お問い合わせ",
+                        "language": "ja"
+                    }
+                },
+                "ko-kr": {
+                    "Chat with Sales": {
+                        "text": "영업팀과 채팅",
+                        "Loading": "로딩 중...",
+                        "Offline": "문의하기",
+                        "language": "ko" //beta
+                    }
+                },
+                "de-de": {
+                    "Chat with Sales": {
+                        "text": "Chatten Sie mit uns",
+                        "Loading": "Laden...",
+                        "Offline": "Kontaktieren Sie uns",
+                        "language": "de"
+                    }
+                },
+                "fr-fr": {
+                    "Chat with Sales": {
+                        "text": "Tchatter avec nous",
+                        "Loading": "Chargement...",
+                        "Offline": "Contactez-nous",
+                        "language": "fr"
+                    }
+                },
+                "it-it": {
+                    "Chat with Sales": {
+                        "text": "Chatta con noi",
+                        "Loading": "Caricamento...",
+                        "Offline": "Contattaci",
+                        "language": "it"
+                    }
+                },
+                "pl-pl": {
+                    "Chat with Sales": {
+                        "text": "Czatuj z nami",
+                        "Loading": "Ładowanie...",
+                        "Offline": "Skontaktuj się z nami",
+                        "language": "en_US" //default english
+                    }
+                },
+                "ru-ru": {
+                    "Chat with Sales": {
+                        "text": "Свяжитесь с нами в чате",
+                        "Loading": "Загрузка...",
+                        "Offline": "Свяжитесь с нами",
+                        "language": "ru"
+                    }
+                },
+                "tr-tr": {
+                    "Chat with Sales": {
+                        "text": "Bizimle sohbet edin",
+                        "Loading": "Yükleniyor...",
+                        "Offline": "Bize ulaşın",
+                        "language": "en_US" //default english
+                    }
+                }
+            };
+
+            // Set the language from the parameter or use 'en_US' as the default language
+            var selectedLanguage = languageParam || 'en_US'; // Default to 'ja' if no language parameter is found
+            var mappedlanguage = languageConfig[locale]?.["Chat with Sales"]?.["language"] || 'en_US'; // Use a default if language not found
+
+            // Check if the selected language exists in languageConfig, otherwise, use a default language
+            if (languageConfig[locale] && languageConfig[locale]["Chat with Sales"]) {
+                embedded_svc.settings.defaultMinimizedText = languageConfig[locale]["Chat with Sales"]["text"];
+                embedded_svc.settings.loadingText = languageConfig[locale]["Chat with Sales"]["Loading"];
+                embedded_svc.settings.disabledMinimizedText = languageConfig[locale]["Chat with Sales"]["Offline"]; //(Defaults to Agent Offline)
+                embedded_svc.settings.language = mappedlanguage;
+            } else {
+                // Provide default values or handle the case when the language is not found
+                embedded_svc.settings.defaultMinimizedText = "Chat with us"; // Default text
+                embedded_svc.settings.loadingText = "Loading..."; // Default loading text
+                embedded_svc.settings.disabledMinimizedText = "Contact us";
+            }
+
+            //embedded_svc.settings.defaultMinimizedText = 'Chat with us'; //(Defaults to Chat with an Expert)
+
+            //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+
+            //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+            // Settings for Chat
+            //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+            // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+            // Returns a valid button ID.
+            //};
+            //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+            //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+            //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+
+            embedded_svc.init(
+                'https://zebra--ebots.sandbox.my.salesforce.com',
+                'https://zebra--ebots.sandbox.my.site.com/ebots',
+                gslbBaseURL,
+                '00D7h0000004jTO',
+                'ZCom_Sales_Agents', {
+                    baseLiveAgentContentURL: 'https://c.la3-c1cs-ia5.salesforceliveagent.com/content',
+                    deploymentId: '5727h0000008REc',
+                    buttonId: '5737h0000008R4w',
+                    baseLiveAgentURL: 'https://d.la3-c1cs-ia5.salesforceliveagent.com/chat',
+                    eswLiveAgentDevName: 'ZCom_Sales_Agents',
+                    isOfflineSupportEnabled: true
+                }
+            );
+        };
+
+        if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://zebra--ebots.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function () {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+        } else {
+            initESW('https://service.force.com');
+        }
+    </script>
+
+</body>
+
+</html>
